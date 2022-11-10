@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require_relative '../lib/item'
+require_relative '../lib/menu'
+
+class Main
+  def initialize
+    @menu = Menu.new
+    @hashes = {
+      '1' => -> { @menu.add_item_menu },
+      '2' => -> { @menu.get_receipt_menu },
+    }
+  end
+
+  def run
+    loop do
+      @menu.main_menu
+      input = gets.chomp
+      break if input == '3'
+      @hashes[input].call
+    end
+  end
+end
+
+Main.new.run
+
+   
